@@ -1,6 +1,7 @@
 ---
 - name: Install application
   hosts: nodes
+  become: true
   vars:
     packages:
       - nginx
