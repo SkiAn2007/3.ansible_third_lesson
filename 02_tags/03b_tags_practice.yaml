@@ -8,7 +8,7 @@
         state: present
       tags: webserver
 
-    - name: postfix is installed
-      yum:
-        name: postfix
-        state: present
+    # - name: postfix is installed
+    #   yum:
+    #     name: postfix
+    #     state: present
