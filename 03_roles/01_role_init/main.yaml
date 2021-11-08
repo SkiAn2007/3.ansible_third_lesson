@@ -1,0 +1,17 @@
+---
+- name: using roles
+  hosts: localhost
+  connection: local
+  pre_tasks:
+    - name: pre-task test
+      debug:
+        msg: "This task executes before roles' tasks"
+  roles:
+    - role: testrole
+      vars:
+        custom_var: 42
+      tags: tagA
+  tasks:
+    - name: task from main playbook
+      debug: 
+        msg: "This task executes after roles' tasks"

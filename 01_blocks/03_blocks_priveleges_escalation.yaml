@@ -1,0 +1,26 @@
+---
+- name: Deploy webserver
+  hosts: nodes
+  become: false
+  tasks:
+    - name: block install nginx and enable service with root priveleges
+      block:
+        - name: Ensure nginx is installed
+          yum:
+            name: nginx
+            state: present
+
+        - name: Start and enable webserver
+          service:
+            name: nginx
+            state: started
+            enabled: true
+      become: true
+      # блок заканчивается здесь
+
+    - name: Test website without root priveleges
+      uri:
+        url: "http://{{ ansible_host }}"
+        return_content: true
+      register: webpage
+      failed_when: webpage.status != 200

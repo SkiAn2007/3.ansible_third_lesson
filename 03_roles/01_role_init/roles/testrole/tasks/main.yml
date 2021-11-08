@@ -1,0 +1,11 @@
+---
+# tasks file for testrole
+- name: debug test
+  debug:
+    msg: "this task executes in role"
+
+- name: debug external var
+  debug:
+    msg: "{{ custom_var }}"
+  tags:
+    - tagA

@@ -1,0 +1,14 @@
+---
+- name: Install application
+  hosts: nodes
+  vars:
+    packages:
+      - nginx
+      - perl
+  tasks:
+    - name: Ensure that packages are installed
+      yum:
+        name: "{{ packages }}"
+        state: installed
+      tags:
+        - install

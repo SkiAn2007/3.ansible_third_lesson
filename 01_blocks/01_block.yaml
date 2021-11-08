@@ -1,0 +1,17 @@
+- name: block example
+  hosts: nodes
+  gather_facts: true
+  tasks:
+  - name: nginx install on centos systems
+    block:
+    - name: install nginx
+      yum:
+        name: nginx
+        state: present
+    - name: ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: true
+    become: true
+    when: ansible_facts.distribution | lower == 'centos'

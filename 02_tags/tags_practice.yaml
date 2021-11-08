@@ -1,0 +1,14 @@
+---
+- name: Example play using tagging
+  hosts: nodes
+  tasks:
+    - name: nginx is installed
+      yum:
+        name: nginx
+        state: present
+      tags: webserver
+
+    - name: postfix is installed
+      yum:
+        name: postfix
+        state: present
