@@ -6,9 +6,9 @@
     - name: nginx start on centos systems
       block:
         - name: set fact os distribution
-          set_fact: 
+          set_fact:
             os_distribution: "{{ ansible_facts.distribution }}"
-        
+
         - name: set fact os distribution version
           set_fact:
             os_full_version: "{{ ansible_facts.distribution_version }}"
