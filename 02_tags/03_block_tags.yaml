@@ -1,5 +1,5 @@
 ---
-- name: Setup httpd service
+- name: Setup nginx webserver
   hosts: nodes
   tasks:
     - name: install and start nginx
