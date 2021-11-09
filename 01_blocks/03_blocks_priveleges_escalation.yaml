@@ -9,17 +9,14 @@
           yum:
             name: nginx
             state: present
-
         - name: Start and enable webserver
           service:
             name: nginx
             state: started
             enabled: true
-        
         - name: populate service facts
           service_facts:
           register: service_facts_list
-
         - name: insert firewalld rule for nginx
           firewalld:
             port: 80/tcp
@@ -29,7 +26,6 @@
           when: service_facts_list.ansible_facts.services["firewalld.service"].state == "running"
       become: true
       # блок заканчивается здесь
-  post_tasks:
     - name: Test website without root priveleges
       uri:
         url: "http://{{ ansible_host }}"
