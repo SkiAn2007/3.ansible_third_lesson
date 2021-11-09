@@ -15,12 +15,25 @@
             name: nginx
             state: started
             enabled: true
+        
+        - name: populate service facts
+          service_facts:
+          register: service_facts_list
+
+        - name: insert firewalld rule for nginx
+          firewalld:
+            port: 80/tcp
+            permanent: true
+            state: enabled
+            immediate: true
+          when: service_facts_list.ansible_facts.services["firewalld.service"].state == "running"
       become: true
       # блок заканчивается здесь
-
+  post_tasks:
     - name: Test website without root priveleges
       uri:
         url: "http://{{ ansible_host }}"
         return_content: true
       register: webpage
       failed_when: webpage.status != 200
+      connection: local

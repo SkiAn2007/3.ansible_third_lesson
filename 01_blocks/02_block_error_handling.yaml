@@ -19,6 +19,9 @@
       - name: emergency debug
         debug:
           msg: "This task will be executed in case of block tasks failure"
+
+      - name: also failed
+        command: /bin/false
     always:
       - name: final debug
         debug:

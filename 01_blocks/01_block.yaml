@@ -1,17 +1,19 @@
 - name: block example
   hosts: nodes
   gather_facts: true
+  become: true
   tasks:
-  - name: nginx install on centos systems
-    block:
-    - name: install nginx
-      yum:
-        name: nginx
-        state: present
-    - name: ensure nginx is running
-      service:
-        name: nginx
-        state: started
-        enabled: true
-    become: true
-    when: ansible_facts.distribution | lower == 'centos'
+    - name: nginx start on centos systems
+      block:
+        - name: set fact os distribution
+          set_fact: 
+            os_distribution: "{{ ansible_facts.distribution }}"
+        
+        - name: set fact os distribution version
+          set_fact:
+            os_full_version: "{{ ansible_facts.distribution_version }}"
+
+        - name: print alltogether
+          debug:
+            msg: "Current host's OS version is {{ os_distribution }} {{ os_full_version }}"
+      when: ansible_facts.distribution | lower == 'centos'
