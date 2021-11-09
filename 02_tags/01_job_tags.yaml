@@ -1,15 +1,16 @@
 ---
-- name: Install application
+- name: job tags
   hosts: nodes
   become: true
-  vars:
-    packages:
-      - nginx
-      - perl
   tasks:
-    - name: Ensure that packages are installed
-      yum:
-        name: "{{ packages }}"
-        state: installed
+    - name: task with prod tag
+      debug:
+        msg: "prod"
       tags:
-        - install
+        - prod
+
+    - name: task with test tag
+      debug:
+        msg: "test"
+      tags:
+        - test

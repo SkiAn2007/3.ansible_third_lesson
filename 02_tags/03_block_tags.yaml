@@ -1,9 +1,8 @@
 ---
-- name: Deploy webserver
+- name: Setup httpd service
   hosts: nodes
-  become: false
   tasks:
-    - name: Block install and start nginx with root priveleges
+    - name: install and start nginx
       block:
         - name: Ensure nginx is installed
           yum:
@@ -24,12 +23,13 @@
             state: enabled
             immediate: true
           when: service_facts_list.ansible_facts.services["firewalld.service"].state == "running"
+      # Тег относится ко всему блоку
       become: true
-      # блок заканчивается здесь
-    - name: Test connection without root priveleges
-      uri:
-        url: "http://{{ ansible_host }}"
-        return_content: true
-      register: webpage
-      failed_when: webpage.status != 200
-      connection: local
+      tags:
+        - webserver
+
+    - name:
+      debug:
+        msg: "debug tag"
+      tags:
+        - debug

@@ -1,8 +1,0 @@
----
-- name: include_tasks with tags
-  tasks:
-  - name: Include common web services tasks
-    include_tasks: 03b_tags_practice.yaml
-    tags:
-    - webproxy
-    - webserver

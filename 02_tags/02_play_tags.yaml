@@ -1,0 +1,18 @@
+---
+- name: 1. play tags - prod
+  hosts: nodes
+  tags:
+    - prod
+  tasks:
+    - name: 1. task from play with prod tag
+      debug:
+        msg: "prod"
+
+- name: 2. play tags - test
+  hosts: nodes
+  tags:
+    - test
+  tasks:
+    - name: 2. task from play with test tag
+      debug:
+        msg: "test"
