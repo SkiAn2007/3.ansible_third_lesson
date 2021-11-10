@@ -1,0 +1,72 @@
+---
+# play with roles
+- name: priveleges test simple role
+  hosts: nodes
+  become: false
+  pre_tasks:
+    - name: roles play
+      debug:
+        msg: roles play started
+  roles:
+    - role: escalation-role
+      become: true
+  tasks:
+    - name: roles task - check active user
+      command: whoami
+      register: whoami_result
+    - name: roles task - check whoami output
+      debug:
+        var: whoami_result.stdout
+  post_tasks:
+    - name: role play stopped
+      debug:
+        msg: "role play stopped"
+
+# play with include_role
+- name: priveleges test simple role
+  hosts: nodes
+  become: false
+  pre_tasks:
+  - name: include_role play start
+    debug:
+      msg: include_role play started
+  tasks:
+    - name: include_role 
+      include_role:
+        name: escalation-role
+        apply:
+          become: true
+    - name: task - check active user
+      command: whoami
+      register: whoami_result
+    - name: task - check whoami output
+      debug:
+        var: whoami_result.stdout
+  post_tasks:
+    - name: include_role play stopped
+      debug:
+        msg: include_role play stopped
+
+# play with import_role
+- name: priveleges test simple role
+  hosts: nodes
+  become: false
+  pre_tasks:
+  - name: import_role play start
+    debug:
+      msg: include_role play started
+  tasks:
+    - name: import_role
+      import_role:
+        name: escalation-role
+      become: true
+    - name: task - check active user
+      command: whoami
+      register: whoami_result
+    - name: task - check whoami output 
+      debug:
+        var: whoami_result.stdout
+  post_tasks:
+    - name: import_role play stopped
+      debug:
+        msg: import_role play stopped
