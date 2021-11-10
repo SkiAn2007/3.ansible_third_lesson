@@ -8,6 +8,9 @@
     - name: pre-task test
       debug:
         msg: "This task executes before roles' tasks"
+    # - name: set fact
+    #   set_fact:
+    #     test_part: test
   roles:
     - role: "{{ test_part }}role"
       vars:
