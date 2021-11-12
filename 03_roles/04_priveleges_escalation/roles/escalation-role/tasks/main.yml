@@ -1,0 +1,9 @@
+---
+# tasks file for escalation-role
+- name: role - check active user
+  command: whoami
+  register: whoami_result
+
+- name: role - check whoami output
+  debug:
+    var: whoami_result.stdout

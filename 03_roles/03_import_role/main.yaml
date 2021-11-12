@@ -4,6 +4,10 @@
   connection: local
   vars: 
     test_part: test
+  # pre_tasks:
+  #   - name: set fact
+  #     set_fact:
+  #       test_part: test
   tasks:
     - name: task before role
       debug:
