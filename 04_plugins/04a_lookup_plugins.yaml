@@ -1,0 +1,10 @@
+---
+- name: lookup plugins
+  hosts: nodes
+  gather_facts: false
+  tasks:
+    - name: file lookup
+      debug: 
+        msg: "file contents: {{ lookup('file', './04b_file_for_lookup.txt').split('\n') }}"
+
+  
