@@ -12,13 +12,16 @@
         telephone: 987-654-3210
   tasks:
     - name: file lookup
-      debug: 
+      debug:
         msg: "file contents: {{ lookup('file', './04b_file_for_lookup.txt').split('\n') }}"
     - name: env lookup
-      debug: 
-        msg: "env contents: {{ lookup('env', 'example_env_var')}}"  
+      debug:
+        msg: "env contents: {{ lookup('env','example_env_var') }}"
+    - name: lines lookup
+      debug:
+        msg: "/etc/ansible/hosts contents: {{ lookup('lines', 'cat /etc/ansible/hosts', wantlist=True) }}"
     - name: output dict lookup result
-      debug: 
+      debug:
         msg: "{{ lookup('dict', users) }}"
     - name: Print phone records
       debug:
