@@ -19,6 +19,7 @@
       vars: 
         custom_var: 42
       tags: tagA
+      when: test_part == "test"
 
     - name: task after role
       debug:
