@@ -1,6 +1,11 @@
 - name:
   debug:
-    msg: "fine"
-- name:
-  debug:
     msg: "Tasks file included successfully"
+
+- name: set os_distrib_version fact
+  set_fact: 
+    os_distrib: "BolgenOS"
+
+- name: conditional expression check
+  debug:
+    msg: "os_distrib conditional check on include_tasks is not applied to this task"

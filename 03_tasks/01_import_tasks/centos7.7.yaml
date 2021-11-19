@@ -1,3 +1,11 @@
 - name:
   debug:
     msg: "Tasks file imported successfully"
+
+- name: set os_distrib_version fact
+  set_fact: 
+    os_distrib: "BolgenOS"
+
+- name: conditional expression check (skipped)
+  debug:
+    msg: "os_distrib conditional check on import_tasks is applied to this task"
