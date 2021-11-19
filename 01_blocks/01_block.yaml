@@ -23,5 +23,5 @@
           debug:
             msg: "Current host's OS version is {{ os_distribution }} {{ os_full_version }}"
       when: 
-        ansible_facts.distribution | lower == 'centos'
-        # run_block
+        - ansible_facts.distribution | lower == 'centos'
+        - run_block
