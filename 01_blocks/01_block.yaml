@@ -7,7 +7,7 @@
   tasks:
     - name: is block active?
       debug:
-        msg: "{{ run_block }}"
+        msg: "run_block value is {{ run_block }}"
 
     - name: nginx start on centos systems
       block:
