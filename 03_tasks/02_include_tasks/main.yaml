@@ -17,3 +17,6 @@
         var: os_distrib_version
     - name: execute tasks file dynamically
       include_tasks: "{{ os_distrib | lower }}{{ os_distrib_version }}.yaml"
+      when:
+        - os_distrib | lower == "centos"
+        - os_distrib_version | string == "7.7"
