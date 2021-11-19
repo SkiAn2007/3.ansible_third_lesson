@@ -1,0 +1,19 @@
+---
+- name: execute tasks depending on OS version
+  gather_facts: true
+  hosts: nodes
+  tasks:
+    - name: set os_distrib_version fact
+      set_fact: 
+        os_distrib: "{{ ansible_facts.distribution }}"    
+    - name:
+      debug: 
+        var: os_distrib
+    - name: set os_distrib_version fact
+      set_fact: 
+        os_distrib_version: "{{ ansible_facts.distribution_version }}"    
+    - name:
+      debug: 
+        var: os_distrib_version
+    - name: execute tasks file dynamically
+      include_tasks: "{{ os_distrib | lower }}{{ os_distrib_version }}.yaml"
