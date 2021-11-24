@@ -5,6 +5,13 @@
   tasks:
     - name: Block install and start nginx with root priveleges
       block:
+        - name: ensure nginx repo files exist on remote host
+          copy:
+            src: nginx.repo
+            dest: /etc/yum.repos.d/nginx.repo
+            owner: root
+            group: root
+            mode: 0644
         - name: Ensure nginx is installed
           yum:
             name: nginx
