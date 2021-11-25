@@ -19,4 +19,4 @@
       import_tasks: centos7.7.yaml
       when:
         - os_distrib | lower == "centos"
-        - os_distrib_version | string == "7.7"
+        - os_distrib_version | string == "7.9"
