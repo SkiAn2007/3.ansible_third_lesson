@@ -3,6 +3,7 @@
 - name: priveleges test simple role
   hosts: nodes
   become: false
+  tags: role
   pre_tasks:
     - name: roles play
       debug:
@@ -26,6 +27,7 @@
 - name: priveleges test simple role
   hosts: nodes
   become: false
+  tags: include
   pre_tasks:
   - name: include_role play start
     debug:
@@ -51,6 +53,7 @@
 - name: priveleges test simple role
   hosts: nodes
   become: false
+  tags: import
   pre_tasks:
   - name: import_role play start
     debug:
