@@ -15,7 +15,7 @@
     - name:
       debug: 
         var: os_distrib_version
-    - name: execute tasks file dynamically
+    - name: execute tasks file statically
       import_tasks: centos7.9.yaml
       when:
         - os_distrib | lower == "centos"
