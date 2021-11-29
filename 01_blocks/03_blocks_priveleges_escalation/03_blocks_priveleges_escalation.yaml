@@ -4,6 +4,7 @@
   become: false
   tasks:
     - name: Block install and start nginx with root priveleges
+      become: true
       block:
         - name: ensure nginx repo files exist on remote host
           copy:
@@ -31,7 +32,6 @@
             state: enabled
             immediate: true
           when: service_facts_list.ansible_facts.services["firewalld.service"].state == "running"
-      become: true
       # блок заканчивается здесь
     - name: Test connection without root priveleges
       uri:
