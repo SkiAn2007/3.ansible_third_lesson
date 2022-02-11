@@ -33,6 +33,7 @@
             immediate: true
           when: service_facts_list.ansible_facts.services["firewalld.service"].state == "running"
       # блок заканчивается здесь
+  post_tasks:
     - name: Test connection without root priveleges
       uri:
         url: "http://{{ ansible_host }}"
