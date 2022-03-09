@@ -1,7 +1,6 @@
 - name: get facts playbook
   hosts: localhost
   connection: local
-  gather_facts: false
   tasks:
   - name: error handling block
     block:
@@ -9,10 +8,10 @@
         debug:
           msg: "You will see failed tasks after this"
 
-      - name: always failed
+      - name: failed task in block
         command: /bin/false
 
-      - name: unreachable debug
+      - name: unreachable block debug
         debug:
           msg: "You won't see this message"
     rescue:
@@ -20,8 +19,12 @@
         debug:
           msg: "This task will be executed in case of block tasks failure"
 
-      - name: also failed
+      - name: failed task in rescue
         command: /bin/false
+      
+      - name: unreachable rescue debug
+        debug:
+          msg: "You won't see this message"
     always:
       - name: final debug
         debug:
