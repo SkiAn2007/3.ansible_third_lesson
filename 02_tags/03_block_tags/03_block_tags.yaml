@@ -1,9 +1,17 @@
 ---
 - name: Setup nginx webserver
   hosts: nodes
+  become: false
   tasks:
     - name: install and start nginx
       block:
+        - name: ensure nginx repo files exist on remote host
+          copy:
+            src: nginx.repo
+            dest: /etc/yum.repos.d/nginx.repo
+            owner: root
+            group: root
+            mode: 0644
         - name: Ensure nginx is installed
           yum:
             name: nginx
