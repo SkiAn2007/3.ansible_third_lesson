@@ -9,3 +9,12 @@
 - name: conditional expression check
   debug:
     msg: "os_distrib conditional check on include_tasks is not applied to this task"
+
+- name: check user
+  command: whoami
+  register: current_user
+  changed_when: false
+
+- name: show current user
+  debug:
+    var: current_user.stdout
