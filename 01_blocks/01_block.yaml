@@ -1,7 +1,6 @@
 - name: block example
   hosts: nodes
   gather_facts: true
-  become: true
   vars:
     run_block: true
   tasks:
@@ -9,7 +8,7 @@
       debug:
         msg: "run_block value is {{ run_block }}"
 
-    - name: nginx start on centos systems
+    - name: print os version block
       block:
         - name: set fact os distribution
           set_fact:
