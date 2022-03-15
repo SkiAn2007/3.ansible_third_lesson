@@ -1,0 +1,22 @@
+---
+- name: hw3
+  hosts: nodes
+  become: true
+  gather_facts: true
+  roles:
+    - role: generatecerts
+      tags: nginx
+    - role: nginx-tls
+      tags: nginx
+    - role: mariadb
+      tags: mariadb
+  post_tasks:
+    - name: check web site from control server
+      uri:
+        url: "https://{{ ansible_host }}:{{ nginx_port_tls }}"
+        return_content: true
+        validate_certs: false   # as far as we use self signed
+      connection: local
+      register: example_webpage_out
+      failed_when: example_webpage_out.status != 200
+      tags: nginx
